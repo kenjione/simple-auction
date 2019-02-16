@@ -1,0 +1,43 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product {
+  margin-bottom: 20px;
+
+  .card-body {
+    a {
+      margin-left: 15px
+    }
+  }
+
+  .card-footer{
+    line-height: 2em;
+
+    span {
+      font-size: 20px;
+    }
+
+    .prices {
+      display: inline;
+
+      .price-bid.under_offer {
+        color: green;
+      }
+
+      .price-bid.sold {
+        color: red;
+      }
+
+      .price-original {
+        margin-left: 10px;
+        font-size: 15px;
+        color: gray;
+      }
+    }
+  }
+}
+
+#products-list {
+  margin-bottom: 20px;
+}

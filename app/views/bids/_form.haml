@@ -1,0 +1,5 @@
+= simple_form_for [product, Bid.new], remote: true do |f|
+  #bid_errors
+
+  = f.input :amount, as: :decimal
+  = f.button :submit, 'Send', class: 'btn btn-primary'

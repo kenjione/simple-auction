@@ -1,0 +1,8 @@
+= simple_form_for product, remote: true do |f|
+  #product_errors
+
+  = f.input :name
+  = f.input :description
+  = f.input :price, as: :decimal
+
+  = f.button :submit, 'Send', class: 'btn btn-primary'

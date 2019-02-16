@@ -1,0 +1,13 @@
+.row
+  .col-md-9
+    = render 'shared/head'
+    = render 'list'
+  .col-md-3
+    = current_user.decorate.balance
+    %button.btn.btn-primary{"data-target" => '#new-modal', 'data-toggle' => 'modal', type: 'button'}
+      Add product
+
+= render 'shared/modal', title: 'New product', id: 'new-modal' do
+  = render 'products/form', product: Product.new
+
+= render 'shared/modal', title: 'Edit product', id: 'edit-modal'

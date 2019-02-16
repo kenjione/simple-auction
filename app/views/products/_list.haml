@@ -1,0 +1,23 @@
+= render 'filter'
+
+- if @products.any?
+  - @products.each do |product|
+    .card.product
+      .card-body
+        - if product.state.hidden? || product.state.published?
+          = link_to product_path(product), method: :delete, class: 'float-right', data: { confirm: 'Are you sure?' } do
+            %i.fas.fa-trash-alt
+
+          = link_to edit_product_path(product), remote: true, class: 'float-right' do
+            %i.fas.fa-pencil-alt
+        - else
+          %span.badge.badge-warning.float-right= product.bid.user_email
+
+        %h5.card-title= product.name
+        %p.card-text= product.description
+
+      .card-footer
+        = product.price
+        = product.toggle_state_link
+- else
+  = 'There are no products yet'

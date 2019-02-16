@@ -1,0 +1,11 @@
+%ul#products-list.nav.nav-tabs{role: "tablist"}
+  %li.nav-item
+    = link_to 'All', products_path, class: "nav-link #{'active' unless params[:filter]}"
+  %li.nav-item
+    = link_to 'Published', products_path(filter: 'published'), class: "nav-link #{'active' if params[:filter] == 'published'}"
+  %li.nav-item
+    = link_to 'Under offer', products_path(filter: 'under_offer'), class: "nav-link #{'active' if params[:filter] == 'under_offer'}"
+  %li.nav-item
+    = link_to 'Sold', products_path(filter: 'sold'), class: "nav-link #{'active' if params[:filter] == 'sold'}"
+  %li.nav-item
+    = link_to 'Hidden', products_path(filter: 'hidden'), class: "nav-link #{'active' if params[:filter] == 'hidden'}"

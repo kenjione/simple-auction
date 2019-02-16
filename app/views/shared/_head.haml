@@ -1,0 +1,6 @@
+- if signed_in?
+  %ul.nav.nav-pills.nav-fill.general
+    %li.nav-item
+      = link_to 'Auction', root_path, class: "nav-link #{'active' if params[:controller] == 'dashboard'}"
+    %li.nav-item
+      = link_to 'My products', products_path, class: "nav-link #{'active' if params[:controller] == 'products'}"

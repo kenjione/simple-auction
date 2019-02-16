@@ -1,0 +1,8 @@
+.row
+  .col-md-9
+    = render 'shared/head'
+    = render 'list'
+  .col-md-3
+    = current_user_balance
+
+= render 'shared/modal', title: 'New bid', id: 'bid-modal'

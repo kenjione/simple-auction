@@ -1,0 +1,26 @@
+- if signed_in?
+  %ul#products-list.nav.nav-tabs{role: "tablist"}
+    %li.nav-item
+      = link_to 'All', root_path, class: "nav-link #{'active' unless params[:filter]}"
+    %li.nav-item
+      = link_to 'My bids', root_path(filter: 'my_bids'), class: "nav-link #{'active' if params[:filter] == 'my_bids'}"
+    %li.nav-item
+      = link_to 'Won', root_path(filter: 'won'), class: "nav-link #{'active' if params[:filter] == 'won'}"
+
+- if @products.any?
+  - @products.each do |product|
+    .card.product
+      .card-body
+        %span.badge.badge-warning.float-right= product.user.email
+
+        %h5.card-title= product.name
+        %p.card-text= product.description
+
+        - if signed_in? && product.bid_user == current_user
+          %span.badge.badge-pill.badge-danger= 'Your bid'
+
+      .card-footer
+        = product.price
+        = product.bid_link
+- else
+  = 'There are no products yet'

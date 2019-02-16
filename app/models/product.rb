@@ -44,6 +44,6 @@ class Product < ApplicationRecord
   end
 
   def allowed_to_update?
-    %w[published hidden].exclude?(state)
+    %w[published hidden].include?(state)
   end
 end

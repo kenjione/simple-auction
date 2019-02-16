@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_product, on: %i[edit update toggle_state accept_offer destroy]
+  before_action :find_product, only: %i[edit update toggle_state accept_offer destroy]
 
   def index
     @products = current_user.products
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.allowed_to_update && @product.update(product_attributes)
+    if @product.allowed_to_update? && @product.update(product_attributes)
       redirect_to products_path, format: 'js'
     else
       render 'update'

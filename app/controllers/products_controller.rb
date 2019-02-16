@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_product, on: %i[edit update toggle_state accept_offer destroy]
 
   def index
     @products = current_user.products
@@ -19,13 +20,10 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = current_user.products.find(params[:id])
   end
 
   def update
-    @product = current_user.products.find(params[:id])
-
-    if @product.update(product_attributes)
+    if @product.allowed_to_update && @product.update(product_attributes)
       redirect_to products_path, format: 'js'
     else
       render 'update'
@@ -33,22 +31,19 @@ class ProductsController < ApplicationController
   end
 
   def toggle_state
-    @product = current_user.products.find(params[:id])
     @product.toggle_state
 
     redirect_to products_path
   end
 
   def accept_offer
-    @product = current_user.products.find(params[:id])
     @product.accept_offer
 
     redirect_to products_path
   end
 
   def destroy
-    @product = current_user.products.find(params[:id])
-    @product.destroy
+    @product.allowed_to_update? && @product.destroy
 
     redirect_to products_path, format: 'js'
   end
@@ -57,5 +52,9 @@ class ProductsController < ApplicationController
 
   def product_attributes
     params.require(:product).permit(:name, :description, :price)
+  end
+
+  def find_product
+    @product = current_user.products.find(params[:id])
   end
 end

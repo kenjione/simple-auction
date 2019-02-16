@@ -16,4 +16,14 @@ RSpec.describe Bid, type: :model do
   it 'Bid valid' do
     expect(bid).to be_valid
   end
+
+  it 'Charges user' do
+    expect { bid.save }.to\
+      change { bid.user.reload.balance }.by(-bid.amount)
+  end
+
+  it 'Refunds user' do
+    expect { bid.save }.to\
+      change { bid.user.reload.balance }.by(-bid.amount)
+  end
 end

@@ -42,4 +42,8 @@ class Product < ApplicationRecord
       update_attribute(:state, 'sold')
     end
   end
+
+  def allowed_to_update?
+    %w[published hidden].exclude?(state)
+  end
 end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :bid do
-    user
+    user { create :user, :rich }
     product
     amount { 100 }
   end
